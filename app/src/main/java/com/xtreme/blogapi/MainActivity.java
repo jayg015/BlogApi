@@ -2,6 +2,7 @@ package com.xtreme.blogapi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.xtreme.blogapi.modelos.Login;
 import com.xtreme.blogapi.modelos.User;
 import com.xtreme.blogapi.servicios.UserClient;
+import com.xtreme.blogapi.vistas.Registro;
 
 import java.util.List;
 
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText edittextusername;
     private EditText edittextpassword;
     private Button btn_login;
+    private Button btn_registro;
     private UserClient blogApi;
 
     @Override
@@ -37,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         edittextusername = findViewById(R.id.login_txt_username);
         edittextpassword = findViewById(R.id.login_txt_password);
-        btn_login= findViewById(R.id.login_btn_login);
+        btn_login = findViewById(R.id.login_btn_login);
+        btn_registro = findViewById(R.id.login_btn_registrar);
 
        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://itla.hectorvent.com/api/")
@@ -52,10 +56,10 @@ public class MainActivity extends AppCompatActivity {
                 String email = edittextusername.getText().toString();
                 String password = edittextpassword.getText().toString();
 
-                Login login = new Login("jyblogapi@blogapi.com","123456");
+                Login login = new Login("mpblogapi@blogapi.com","123");
                 Call<User> call = blogApi.login(login);
                 call.enqueue(new Callback<User>() {
-                    @Override
+                        @Override
                     public void onResponse(Call<User> call, Response<User> response) {
                         Log.i(TAG, "paso");
                         if(response.isSuccessful()){
@@ -74,6 +78,16 @@ public class MainActivity extends AppCompatActivity {
                         Log.i(TAG, "Me jodi");
                     }
                 });
+            }
+        });
+
+        btn_registro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent registro_activity = new Intent (v.getContext(), Registro.class);
+                startActivityForResult(registro_activity, 0);
+
+
             }
         });
 

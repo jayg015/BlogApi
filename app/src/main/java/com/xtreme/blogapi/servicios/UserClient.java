@@ -15,5 +15,7 @@ public interface UserClient {
     @POST("login")
     Call<User> login(@Body Login login);
 
+    @POST("register")
+    Call<User> register(@Body User user);
 
 }
