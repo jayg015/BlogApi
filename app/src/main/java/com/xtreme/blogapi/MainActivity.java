@@ -2,21 +2,22 @@ package com.xtreme.blogapi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.xtreme.blogapi.formularios.Principal;
 import com.xtreme.blogapi.modelos.Login;
 import com.xtreme.blogapi.modelos.User;
 import com.xtreme.blogapi.servicios.UserClient;
-import com.xtreme.blogapi.vistas.Registro;
-
-import java.util.List;
+import com.xtreme.blogapi.formularios.Registro;
+import com.xtreme.blogapi.utilitarios.api;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,23 +44,19 @@ public class MainActivity extends AppCompatActivity {
         btn_login = findViewById(R.id.login_btn_login);
         btn_registro = findViewById(R.id.login_btn_registrar);
 
-       Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://itla.hectorvent.com/api/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        blogApi = retrofit.create(UserClient.class);
+       Retrofit retrofit = api.getApi();
+       blogApi = retrofit.create(UserClient.class);
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 String email = edittextusername.getText().toString();
                 String password = edittextpassword.getText().toString();
 
-                Login login = new Login("mpblogapi@blogapi.com","123");
+                Login login = new Login(email,password);
                 Call<User> call = blogApi.login(login);
                 call.enqueue(new Callback<User>() {
-                        @Override
+                    @Override
                     public void onResponse(Call<User> call, Response<User> response) {
                         Log.i(TAG, "paso");
                         if(response.isSuccessful()){
@@ -67,6 +64,18 @@ public class MainActivity extends AppCompatActivity {
                             Log.i(TAG, "mi ID es: "+response.body().getId());
                             Log.i(TAG, "mi Nombre es: "+response.body().getName());
                             Log.i(TAG, "mi Email es: "+response.body().getEmail());
+
+                            SharedPreferences preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.putInt("id", response.body().getId());
+                            editor.putString("nombre", response.body().getName());
+                            editor.putString("email", response.body().getEmail());
+                            editor.putString("token", response.body().getToken());
+                            editor.commit();
+
+                            Intent principtal = new Intent (v.getContext(), Principal.class);
+                            startActivityForResult(principtal, 0);
+
                         }else{
                             Log.i(TAG, "Credenciales invalidas");
                         }
@@ -75,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
                         Toast.makeText(MainActivity.this,"Error :(",Toast.LENGTH_SHORT).show();
-                        Log.i(TAG, "Me jodi");
+                        Log.i(TAG, "No funciono");
                     }
                 });
             }
@@ -90,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
 
     }
 }

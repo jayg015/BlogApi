@@ -1,4 +1,4 @@
-package com.xtreme.blogapi.vistas;
+package com.xtreme.blogapi.formularios;
 
 import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
@@ -19,6 +19,7 @@ import com.xtreme.blogapi.MainActivity;
 import com.xtreme.blogapi.R;
 import com.xtreme.blogapi.modelos.User;
 import com.xtreme.blogapi.servicios.UserClient;
+import com.xtreme.blogapi.utilitarios.api;
 
 public class Registro extends AppCompatActivity {
 
@@ -56,10 +57,7 @@ public class Registro extends AppCompatActivity {
 
                     User user = new User(nombre,email,password);
 
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("http://itla.hectorvent.com/api/")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
+                    Retrofit retrofit = api.getApi();
 
                     blogApi = retrofit.create(UserClient.class);
                     Call<User> call = blogApi.register(user);
@@ -76,7 +74,7 @@ public class Registro extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<User> call, Throwable t) {
                             Toast.makeText(Registro.this,"Error :(",Toast.LENGTH_SHORT).show();
-                            Log.i(TAG, "Me jodi");
+                            Log.i(TAG, "No funciono.");
                         }
                     });
             }

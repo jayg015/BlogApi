@@ -18,4 +18,6 @@ public interface UserClient {
     @POST("register")
     Call<User> register(@Body User user);
 
+    @GET("me")
+    Call<User> me (@Header("Athorization") String token);
 }
