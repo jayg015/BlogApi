@@ -16,6 +16,50 @@ public class Post {
     private String username;
     private int view;
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setCommets(int commets) {
+        this.commets = commets;
+    }
+
+    public void setLiked(boolean liked) {
+        this.liked = liked;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public void setTags(String[] tags) {
+        this.tags = tags;
+    }
+
+    public void setUseremail(String useremail) {
+        this.useremail = useremail;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setView(int view) {
+        this.view = view;
+    }
+
 
     public int getId() {
         return id;
@@ -76,4 +120,6 @@ public class Post {
     }
 
 
+    public Post() {
+    }
 }

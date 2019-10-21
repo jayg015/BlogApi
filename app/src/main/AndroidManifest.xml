@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".formularios.Principal"></activity>
+        <activity android:name=".formularios.Principal" />
         <activity android:name=".formularios.Registro" />
         <activity android:name=".MainActivity">
             <intent-filter>
