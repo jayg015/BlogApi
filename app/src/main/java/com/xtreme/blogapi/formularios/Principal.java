@@ -12,12 +12,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Adapter;
-import android.widget.LinearLayout;
+import android.view.View;
+import android.widget.Toast;
 
 
 import com.xtreme.blogapi.R;
-import com.xtreme.blogapi.modelos.City;
 import com.xtreme.blogapi.modelos.Post;
 import com.xtreme.blogapi.servicios.PostClient;
 
@@ -34,8 +33,7 @@ public class Principal extends AppCompatActivity {
     private static final String TAG="blogapi";
     private PostClient blogApi;
     private String token;
-    private  ArrayList<City> listCity;
-    private RecyclerView recyclerView;
+     private RecyclerView recyclerView;
 
 
     @Override
@@ -61,7 +59,7 @@ public class Principal extends AppCompatActivity {
                 }else {
                      {
                          List<Post>posts=response.body();
-                         getCity(posts);
+                         getPost(posts);
                      }
                 }
 
@@ -76,20 +74,27 @@ public class Principal extends AppCompatActivity {
     }
 
 
-    public void getCity(List<Post> posts){
+    public void getPost(List<Post> posts){
         recyclerView= findViewById(R.id.principal_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
 
-        ArrayList<Post> list = new ArrayList<>();
+        final ArrayList<Post> list = new ArrayList<>();
 
         for(Post post:posts){
             Post addpost=new Post();
-            addpost.setTitulo(post.getTitulo());
-            addpost.setText(post.getText());
+            addpost.setId(post.getId());
+            addpost.setTitulo("Titulo: "+ post.getTitle());
+            addpost.setText("Detalle: \n\n"+post.getText()+"\n");
             list.add(addpost);
         }
 
         RowAdapter rowAdapter = new RowAdapter(list);
+        rowAdapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"Seleccion: "+list.get(recyclerView.getChildAdapterPosition(v)).getId(),Toast.LENGTH_SHORT).show();
+            }
+        });
         recyclerView.setAdapter(rowAdapter);
     }
 
