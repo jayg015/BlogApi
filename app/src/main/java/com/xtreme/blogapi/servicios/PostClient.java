@@ -18,4 +18,7 @@ public interface PostClient {
     @GET("post")
     Call<List<Post>> getPost(@Header("Authorization") String token);
 
+    @GET("post/{id}")
+    Call<List<Post>> onePost(@Header("Authorization") int postId);
+
 }

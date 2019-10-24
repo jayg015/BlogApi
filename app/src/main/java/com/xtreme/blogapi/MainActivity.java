@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         edittextusername = findViewById(R.id.login_txt_username);
         edittextpassword = findViewById(R.id.login_txt_password);
@@ -60,10 +61,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(Call<User> call, Response<User> response) {
                         Log.i(TAG, "paso");
                         if(response.isSuccessful()){
-                            Log.i(TAG, "mi token es: "+response.body().getToken());
-                            Log.i(TAG, "mi ID es: "+response.body().getId());
-                            Log.i(TAG, "mi Nombre es: "+response.body().getName());
-                            Log.i(TAG, "mi Email es: "+response.body().getEmail());
 
                             SharedPreferences preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = preferences.edit();
@@ -95,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent registro_activity = new Intent (v.getContext(), Registro.class);
                 startActivityForResult(registro_activity, 0);
-
 
             }
         });
