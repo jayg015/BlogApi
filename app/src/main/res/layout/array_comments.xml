@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="88dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp"
+    android:paddingEnd="12dp"
+    android:paddingStart="12dp"
+    android:background="#45E6E6E6">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="80"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="80"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/array_item_txt_titulo"
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:text="Titulo"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/view_post_txt_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12/12/2019"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/array_item_txt_detalle"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="Detalle"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="15sp"
+            android:layout_height="match_parent"
+            android:layout_weight="20"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="25"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    app:srcCompat="@drawable/ic_view" />
+
+                <TextView
+                    android:id="@+id/view_post_txt_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:text="Views" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="25"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    app:srcCompat="@drawable/ic_comment" />
+
+                <TextView
+                    android:id="@+id/view_post_txt_comentarios"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:text="Comentarios" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="25"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="42dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    app:srcCompat="@drawable/ic_like" />
+
+                <TextView
+                    android:id="@+id/view_post_txt_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:text="Likes" />
+            </LinearLayout>
+
+            <Switch
+                android:id="@+id/switch2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
